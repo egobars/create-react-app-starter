@@ -1,16 +1,49 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Choo Choo! This is an example of a create-react-app site running on Railway.</p>
-        <a className="App-link" href="https://react.dev/learn" target="_blank" rel="noreferrer noopener">Learn React</a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.login = this.login.bind(this);
+    }
+
+    async login() {
+        /*let data = {
+            email: username,
+            password: password
+        };*/
+
+        const config = {
+            url: '/log',
+            method: 'post',
+            headers: {
+                'content-type': 'application/json',
+            },
+            data: {
+                'email': 'aaa',
+                'password': 'aaa'
+            },
+            withCredentials: true,
+        }
+
+        await axios(config).then(res => {
+            console.log(res);
+            console.log(res.headers["set-cookie"]);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+
+    render() {
+        this.login();
+        
+        return (
+            <span>b</span>
+        )
+    }
 }
 
 export default App;
